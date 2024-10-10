@@ -1,4 +1,6 @@
 # List of Portfolio Projects
+This repositories for iOS development using listed skills. 
+
 ### Using Skills
 ![Swift](https://img.shields.io/badge/Swift-%23F05138?style=flat&logo=swift&logoColor=white)
 ![UIKit](https://img.shields.io/badge/UIKit-%23007AFF?style=flat&logo=apple&logoColor=white)
