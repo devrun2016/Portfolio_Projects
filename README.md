@@ -1,2 +1,1 @@
-# Portfolio_Projects
-PortfolioProjects
+# List of Portfolio Projects
