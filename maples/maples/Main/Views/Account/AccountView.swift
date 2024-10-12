@@ -48,6 +48,11 @@ struct AccountView: View {
             Spacer()
         }
         .padding()
+        .onAppear {
+            Task {
+                await authViewModel.fetchUser()
+            }
+        }
     }
 }
 

@@ -69,7 +69,7 @@ struct ProfileImageView: View {
                     .foregroundColor(Color(.systemBlue))
                     .cornerRadius(8)
             }
-            .onChange(of: viewModel.selectedPhotos) { _ in
+            .onAppear {
                 viewModel.handleImageSelection()
             }
             .offset(x: 40, y: 40)

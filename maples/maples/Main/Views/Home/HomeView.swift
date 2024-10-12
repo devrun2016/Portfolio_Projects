@@ -13,12 +13,6 @@ struct HomeView: View {
     
     var body: some View {
         TabView {
-            Text("홈")
-                .tabItem { Label("홈", systemImage: "house.fill")}
-            
-            Text("홈")
-                .tabItem { Label("홈", systemImage: "house.fill")}
-            
             ForumView()
                 .tabItem { Label("커뮤니티", systemImage: "square.fill.text.grid.1x2")}
             

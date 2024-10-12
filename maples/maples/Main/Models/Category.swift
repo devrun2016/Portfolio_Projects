@@ -8,5 +8,5 @@
 import Foundation
 
 struct Category {
-    var categories: [String] = ["공지게시판", "자유게시판", "모임게시판", "질문게시판"]
+    var categories: [String] = ["자유게시판", "모임게시판", "질문게시판", "일자리토크"]
 }
