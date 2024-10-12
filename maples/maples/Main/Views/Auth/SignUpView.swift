@@ -144,6 +144,11 @@ struct SignUpView: View {
                     return
                 }
                 
+                guard authViewModel.nickName.count <= 6 else {
+                    authViewModel.vaildateMessage = "닉네임은 6글자 이하로 설정해주세요!"
+                    return
+                }
+                
                 Task {
                     try await authViewModel.createUser(email: authViewModel.email, password: authViewModel.password, nickName: authViewModel.nickName)
                 }

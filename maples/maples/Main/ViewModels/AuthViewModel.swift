@@ -23,6 +23,10 @@ class AuthViewModel: ObservableObject {
     
     init() {
         self.userSession = Auth.auth().currentUser
+        
+        Task {
+            await fetchUser()
+        }
     }
     
     //Email Validation
@@ -44,9 +48,9 @@ class AuthViewModel: ObservableObject {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = result.user
-            let user = User(id: result.user.uid, nickName: nickName, email: email)
+            let user = User(id: result.user.uid, nickName: nickName, email: email, date: Date(), imageName: "")
             let encodedUser = try Firestore.Encoder().encode(user)
-            try await Firestore.firestore().collection("users").document(user.id).setData(encodedUser)
+            try await Firestore.firestore().collection("users").document(user.id ?? "").setData(encodedUser)
         } catch let error as NSError {
             if let errocde = AuthErrorCode(rawValue: error.code) {
                 switch errocde {
@@ -72,4 +76,21 @@ class AuthViewModel: ObservableObject {
         }
     }
     
+    func signOut() {
+        do {
+            try Auth.auth().signOut()
+            self.userSession = nil
+            self.currentUser = nil
+        } catch {
+            print("Error: Failed to sign out.")
+        }
+    }
+    
+    // 사용자 데이터 가져오기
+    func fetchUser() async {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else { return }
+        self.currentUser = try? snapshot.data(as: User.self)
+    }
 }

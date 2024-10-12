@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    //View Models
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     var body: some View {
         TabView {
             Text("홈")
@@ -16,8 +19,8 @@ struct HomeView: View {
             Text("홈")
                 .tabItem { Label("홈", systemImage: "house.fill")}
             
-            Text("홈")
-                .tabItem { Label("홈", systemImage: "house.fill")}
+            ForumView()
+                .tabItem { Label("커뮤니티", systemImage: "square.fill.text.grid.1x2")}
             
             AccountView()
                 .tabItem { Label("계정", systemImage: "person.fill")}
@@ -27,4 +30,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environmentObject(AuthViewModel())
 }
