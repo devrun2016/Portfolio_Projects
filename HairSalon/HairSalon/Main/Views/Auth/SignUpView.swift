@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SignUpView: View {
+    //Imported ViewModels
+    @EnvironmentObject var viewModel: AuthViewModel
+    
     //Import Files
     private let appColor = AppColor()
     
@@ -15,6 +18,8 @@ struct SignUpView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
+    
+    @State private var isEmailValid: Bool = false
     
     var body: some View {
         VStack {
@@ -44,10 +49,13 @@ struct SignUpView: View {
                 SecureField("Re-Enter your password", text: $confirmPassword)
             }
             .padding(.top, 40)
-            
+             
             //Sign In Button
             Button("Sign Up") {
-                
+                Task {
+                    //Create User But need to create validation!!!!
+                    try await AuthViewModel().createUser(email: email, password: password, nickName: "welcome", profileImageURL: "person.crop.circle.fill")
+                }
             }
             .frame(maxWidth: .infinity, minHeight: 48)
             .background(Color(.systemBlue))
@@ -69,4 +77,5 @@ struct SignUpView: View {
 
 #Preview {
     SignUpView()
+        .environmentObject(AuthViewModel())
 }

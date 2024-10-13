@@ -23,7 +23,7 @@ struct AccountView: View {
                     .frame(width: 88)
                     .foregroundColor(appColor.darkGray)
                 
-                Text("Emmie Watson")
+                Text("User#1010")
                     .font(.system(size: 16, weight: .medium))
                     .foregroundColor(appColor.textBlack)
                 
