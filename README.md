@@ -8,5 +8,6 @@ This repositories for iOS development using listed skills.
 ![Firebase](https://img.shields.io/badge/Firebase-%23FFCA28?style=flat&logo=firebase&logoColor=white)
 ![Azure](https://img.shields.io/badge/Azure-%23007FFF?style=flat&logo=azure&logoColor=white)
 
-1.  <a href="https://github.com/devrun2016/Portfolio_Projects/tree/main/maples">MAPLES Community App</a>  SwiftUI / Firebase Auth / Firestore / Storage
-
+1. <a href="https://github.com/devrun2016/Portfolio_Projects/tree/main/maples">MAPLES Community App</a>  SwiftUI / Firebase Auth / Firestore / Storage
+2. <a href="https://github.com/devrun2016/Portfolio_Projects/tree/main/HairSalon">Hair Salon App</a> SwiftUI / Swift / Firebase / CoreLocation / MapKit | Start: Oct 13, 2024
+   
