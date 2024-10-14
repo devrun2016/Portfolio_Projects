@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SignUpView: View {
     //Imported ViewModels
-    @EnvironmentObject var viewModel: AuthViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     //Import Files
     private let appColor = AppColor()
@@ -18,6 +18,7 @@ struct SignUpView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     @State private var confirmPassword: String = ""
+    @State private var userName: String = ""
     
     @State private var isEmailValid: Bool = false
     
@@ -36,25 +37,47 @@ struct SignUpView: View {
                 
                 TextField("Enter your emaill adress", text: $email)
                     .padding(.bottom)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled(true)
+                
+                Text("User name")
+                    .font(.system(size: 16, weight: .regular))
+                
+                TextField("Enter your user name", text: $userName)
+                    .padding(.bottom)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled(true)
                 
                 Text("Password")
                     .font(.system(size: 16, weight: .regular))
                 
                 SecureField("Enter your password", text: $password)
                     .padding(.bottom)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled(true)
                 
                 Text("Confirm Password")
                     .font(.system(size: 16, weight: .regular))
                 
                 SecureField("Re-Enter your password", text: $confirmPassword)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled(true)
             }
             .padding(.top, 40)
+            
+            Text("\(authViewModel.validationError)")
+                .font(.caption)
+                .foregroundColor(.red)
              
             //Sign In Button
             Button("Sign Up") {
+                guard password == confirmPassword else {
+                    authViewModel.validationError = "Password does not match"
+                    return
+                }
+                
                 Task {
-                    //Create User But need to create validation!!!!
-                    try await AuthViewModel().createUser(email: email, password: password, nickName: "welcome", profileImageURL: "person.crop.circle.fill")
+                    try await authViewModel.createUser(email: email, password: password, userName: userName)
                 }
             }
             .frame(maxWidth: .infinity, minHeight: 48)

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct SignInView: View {
+    //Imported ViewModels
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     //Import Files
     private let appColor = AppColor()
     
@@ -31,13 +34,21 @@ struct SignInView: View {
                     
                     TextField("Enter your emaill adress", text: $email)
                         .padding(.bottom)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled(true)
                     
                     Text("Password")
                         .font(.system(size: 16, weight: .regular))
                     
                     SecureField("Enter your password", text: $password)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled(true)
                 }
                 .padding(.top, 40)
+                
+                Text("\(authViewModel.validationError)")
+                    .font(.caption)
+                    .foregroundColor(.red)
                 
                 //Find Password
                 HStack {
@@ -53,7 +64,9 @@ struct SignInView: View {
                 
                 //Sign In Button
                 Button("Sign In") {
-                    
+                    Task {
+                        try await authViewModel.signIn(email: email, password: password)
+                    }
                 }
                 .frame(maxWidth: .infinity, minHeight: 48)
                 .background(Color(.systemBlue))
@@ -89,4 +102,5 @@ struct SignInView: View {
 
 #Preview {
     SignInView()
+        .environmentObject(AuthViewModel())
 }

@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    //Imported ViewModels
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     var body: some View {
-        VStack {
+        if authViewModel.userSession != nil {
+            MainTabView()
+        } else {
             SignInView()
         }
     }
@@ -17,4 +22,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(AuthViewModel())
 }
